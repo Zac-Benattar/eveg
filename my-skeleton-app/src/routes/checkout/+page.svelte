@@ -2,7 +2,7 @@
 	import BasketTable from '$lib/components/BasketTable.svelte';
 </script>
 
-<div>
+<div class="main-container p-2">
 	<div id="basket" class="flex flex-col">
 		<h2>Basket Contents</h2>
 		<BasketTable />
@@ -12,7 +12,7 @@
 		<h2>Customer Details</h2>
 
 		<form class="customerDetails" action="creditcard">
-			<div class="flex flex-col gap-y-2 w-70">
+			<div class="flex flex-col grow-0 gap-y-2 w-70">
 				<label class="label">
 					<span>Name:</span>
 					<input class="input" type="text" placeholder="John Smith" />
@@ -42,3 +42,11 @@
 		</form>
 	</div>
 </div>
+
+<style lang="postcss">
+	.main-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+</style>

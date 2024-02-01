@@ -68,13 +68,13 @@ export type ProductData = {
 };
 
 export class Product {
-	name: string;
-	type: string;
-	image: string;
-	packsize: number;
-	units: string;
-	price: number;
-	productID: number;
+	private name: string;
+	private type: string;
+	private image: string;
+	private packsize: number;
+	private units: string;
+	private price: number;
+	private productID: number;
 
 	constructor(productData: ProductData) {
 		this.name = productData.name;
@@ -85,18 +85,70 @@ export class Product {
 		this.price = productData.price;
 		this.productID = productData.productID;
 	}
+
+	public getProductTitle(): string {
+		let packSize: string;
+		if (this.units === 'unit') {
+			packSize = 'each';
+		} else {
+			packSize = `${this.packsize}${this.units}`;
+		}
+		return `${this.name} ${packSize}`;
+	}
+
+	public getImageSrc(): string {
+		return this.image;
+	}
+
+	public getProductID(): number {
+		return this.productID;
+	}
+
+	public getPrice(): number {
+		return this.price;
+	}
+
+	public getPacksize(): number {
+		return this.packsize;
+	}
+
+	public getUnits(): string {
+		return this.units;
+	}
+
+	public getPriceString(): string {
+		const price: number = this.price / 100;
+
+		return `£${price.toFixed(2)}`;
+	}
+
+	public getPricePerUnitString(): string {
+		let unit: string;
+		let multiplier: number = 1;
+		if (this.units === 'unit') {
+			unit = ' each';
+		} else if (this.units === 'g') {
+			unit = '/kg';
+			multiplier = 1000;
+		} else {
+			unit = `/${this.units}`;
+		}
+
+		return `£${(this.price / 100 / this.packsize * multiplier).toFixed(2)}${unit}`;
+	}
 }
 
 export function loadProducts(): ProductData[] {
 	const productDetails: ProductData[] = [];
+	// The odd conversions are just to please the type checker
 	for (let i = 0; i < productData.length; i++) {
 		const thisProduct = {
-			name: productData[i][0],
-			type: productData[i][1],
-			image: productData[i][2],
-			packsize: productData[i][3],
-			units: productData[i][4],
-			price: productData[i][5],
+			name: productData[i][0].toString(),
+			type: productData[i][1].toString(),
+			image: productData[i][2].toString(),
+			packsize: parseInt(productData[i][3].toString()),
+			units: productData[i][4].toString(),
+			price: parseInt(productData[i][5].toString()),
 			productID: i
 		};
 		productDetails.push(thisProduct);

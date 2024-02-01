@@ -1,25 +1,49 @@
 <script lang="ts">
-	import { type BasketItem, basketStore } from '$lib/basket';
+	import { type BasketItem, basketStore, basketPriceStringStore } from '$lib/basket';
 
 	let basket: BasketItem[] = [];
+	let basketCost: string = '£0.00';
 
 	basketStore.subscribe((value) => {
 		basket = value;
+	});
+
+	basketPriceStringStore.subscribe((value) => {
+		basketCost = value;
 	});
 </script>
 
 <div class="flex flex-col">
 	<div>
-		<h2>Basket</h2>
-		<div>
+		<div class="flex flex-col p-2 gap-3">
+			<h2>Basket</h2>
 			<ul class="list">
 				{#each basket as item}
 					<li>
-						<span>{item.name}</span>
-						<span>{item.quantity}</span>
+						<div class="flex justify-center">
+							<img class="rounded-lg" src={item.product.getImageSrc()} alt="" />
+						</div>
+						<span>{item.product.getProductTitle()}</span>
+						<span>x{item.quantity}</span>
 					</li>
 				{/each}
 			</ul>
+			<div class="grow">
+				<h3>Total: {basketCost}</h3>
+			</div>
+			<div class="grow">
+				<a href="/checkout" class="btn variant-filled" data-sveltekit-preload-data="hover"
+					>Checkout</a
+				>
+			</div>
 		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+	img {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+	}
+</style>
