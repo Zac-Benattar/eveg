@@ -7,6 +7,7 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	import BasketSidebar from '$lib/components/BasketSidebar.svelte';
+	import SearchBar from '$lib/components/SearchBar.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
@@ -16,17 +17,13 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead"
-			><a href="/" class="btn" data-sveltekit-preload-data="hover"><h1>E-Veg</h1></a
+				><a href="/" class="btn" data-sveltekit-preload-data="hover"><h1>E-Veg</h1></a
 				></svelte:fragment
 			>
 			<svelte:fragment slot="trail"
 				><div class="flex flex-row gap-x-3 place-items-center grow">
 					<div><LightSwitch /></div>
-					<input class="input" title="Input (text)" type="text" placeholder="Search" /><a
-						href="/"
-						class="btn-icon variant-filled btn-icon-lg"
-						data-sveltekit-preload-data="hover">🔍</a
-					>
+					<div><SearchBar /></div>
 				</div></svelte:fragment
 			>
 		</AppBar>
