@@ -2,7 +2,7 @@
 	import type { Product } from '$lib/products';
 	import ProductCard from './ProductCard.svelte';
 
-	export let products: Product[];
+	export let products: Product[] = [];
 </script>
 
 <div>

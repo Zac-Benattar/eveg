@@ -17,6 +17,8 @@
 		// Add the product to the basket store
 		addToBasket(product, quantity);
 	}
+	
+
 </script>
 
 <div class="card flex flex-col p-3 m-2 h-100 gap-2 justify-center">
