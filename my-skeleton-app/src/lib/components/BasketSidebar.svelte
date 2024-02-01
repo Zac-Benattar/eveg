@@ -21,9 +21,9 @@
 				{#each basket as item}
 					<li>
 						<div class="flex justify-center">
-							<img class="rounded-lg" src={item.product.getImageSrc()} alt="" />
+							<img class="rounded-lg" src={item.image} alt="" />
 						</div>
-						<span>{item.product.getProductTitle()}</span>
+						<span>{item.title}</span>
 						<span>x{item.quantity}</span>
 					</li>
 				{/each}
