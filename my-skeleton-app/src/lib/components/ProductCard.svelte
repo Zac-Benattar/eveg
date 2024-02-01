@@ -4,8 +4,8 @@
 
 	export let product: Product;
 
-    const componentId: string = product.productID.toString();
-    const quantitySelectId: string = `quantity-select-${componentId}`;
+	const componentId: string = product.getProductID().toString();
+	const quantitySelectId: string = `quantity-select-${componentId}`;
 
 	function onAddToBasket() {
 		// Find the quantity select element
@@ -19,28 +19,30 @@
 	}
 </script>
 
-<div class="card">
-	<div class="flex flex-col">
-		<div class="h2">{product.name} {product.packsize} {product.units}</div>
-		<div class="flex flex-col">
-			<div id="image-container">
-				<div>
-					<img class="h-auto max-w-full rounded-lg" src={product.image} alt="" />
-				</div>
-			</div>
-			<div class="grid">
-				<div class="h3">{product.price}</div>
-			</div>
-			<div class="flex flex-col">
-				<select class="select" id={quantitySelectId}>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-				<button type="button" class="btn variant-filled" on:click={onAddToBasket}>Add</button>
-			</div>
+<div class="card flex flex-col p-3 m-2 h-100 gap-2 justify-center">
+	<div class="h4 grow-0">{product.getProductTitle()}</div>
+	<div class="image-container">
+		<div class="flex justify-center">
+			<img class="rounded-lg" src={product.getImageSrc()} alt="" />
+		</div>
+	</div>
+	<div class="flex flex-row justify-center content-evenly gap-2">
+		<div class="h4">{product.getPriceString()}</div>
+		<div class="h4">{product.getPricePerUnitString()}</div>
+	</div>
+	<div class="flex flex-row justify-center content-evenly gap-2">
+		<div class="grow">
+			<select class="select" id={quantitySelectId}>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</div>
+
+		<div class="grow">
+			<button type="button" class="btn variant-filled" on:click={onAddToBasket}>Add</button>
 		</div>
 	</div>
 </div>
@@ -49,5 +51,11 @@
 	.card {
 		width: 200px;
 		height: 300px;
+	}
+
+	img {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
 	}
 </style>
