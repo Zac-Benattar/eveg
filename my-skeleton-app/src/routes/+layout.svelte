@@ -13,9 +13,32 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	import BasketSidebar from '$lib/components/BasketSidebar.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
+	import { Modal } from '@skeletonlabs/skeleton';
+	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	import { initializeStores } from '@skeletonlabs/skeleton';
+	import { getModalStore } from '@skeletonlabs/skeleton';
+	import { onMount } from 'svelte';
+
+	initializeStores();
+
+	const modalStore = getModalStore();
+
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	onMount(() => {
+		const modal: ModalSettings = {
+			type: 'confirm',
+			// Data
+			title: 'This site uses cookies',
+			body: 'By using this site, you are consenting to our use of cookies <br> We use cookies purely for the functionality of the website - to store the products that are in your basket. <br> For further details of how we use your data, please see our privacy policy.',
+			// TRUE if confirm pressed, FALSE if cancel pressed
+			response: (r: boolean) => console.log('response:', r)
+		};
+		modalStore.trigger(modal);
+	});
 </script>
 
+<Modal />
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
