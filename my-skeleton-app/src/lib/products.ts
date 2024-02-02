@@ -60,6 +60,10 @@ export class Product {
 		return this.packsize;
 	}
 
+	public getCategory(): string {
+		return this.category;
+	}
+
 	public getUnits(): string {
 		return this.units;
 	}
@@ -86,14 +90,23 @@ export class Product {
 	}
 }
 
+const categories: Record<string, boolean> = {
+	veg: true,
+	fruit: true,
+	dairy: true,
+	other: true
+};
+
 export const productsStore = writable<Product[]>();
 export const searchTermStore = writable<string>('');
+export const filterStore = writable<Record<string, boolean>>(categories);
 export const filteredProductsStore = derived(
-	[productsStore, searchTermStore],
-	([$products, $searchTerm]) => {
-		if ($searchTerm === '') return $products;
+	[productsStore, searchTermStore, filterStore],
+	([$products, $searchTerm, $filters]) => {
+		if (!$products) return [];
+
 		return $products.filter((product) => {
-			return product.getProductTitle().toLowerCase().includes($searchTerm.toLowerCase());
+			return product.getProductTitle().toLowerCase().includes($searchTerm.toLowerCase()) && $filters[product.getCategory()];
 		});
 	}
 );
