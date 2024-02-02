@@ -86,10 +86,10 @@ export class Product {
 	}
 }
 
-export const products = writable<Product[]>();
-export const searchTerm = writable<string>('');
-export const filteredProducts = derived(
-	[products, searchTerm],
+export const productsStore = writable<Product[]>();
+export const searchTermStore = writable<string>('');
+export const filteredProductsStore = derived(
+	[productsStore, searchTermStore],
 	([$products, $searchTerm]) => {
 		if ($searchTerm === '') return $products;
 		return $products.filter((product) => {
@@ -100,7 +100,7 @@ export const filteredProducts = derived(
 
 export async function initProducts() {
 	const tempProducts = await getProductsFromServer();
-	if (tempProducts) products.set(tempProducts);
+	if (tempProducts) productsStore.set(tempProducts);
 }
 
 async function getProductsFromServer(): Promise<Product[] | undefined> {

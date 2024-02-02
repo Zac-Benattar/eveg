@@ -1,12 +1,12 @@
 <script lang="ts">
 	import ProductsGrid from '$lib/components/ProductsGrid.svelte';
-	import { initProducts, filteredProducts, Product } from '$lib/products';
+	import { initProducts, filteredProductsStore, Product } from '$lib/products';
 
 	initProducts();
 
 	let productList: Product[] = [];
 
-	filteredProducts.subscribe((value) => {
+	filteredProductsStore.subscribe((value) => {
 		productList = value;
 	});
 </script>
