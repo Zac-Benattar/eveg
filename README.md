@@ -1,3 +1,6 @@
+# Accessing the new version
+- [eveg.vercel.app](https://eveg.vercel.app/) is a build of the main branch hosted by Vercel.
+  - Images currently don't load due to the Vite build steps messing with file locations but everything else is functional
 # Running the new version
 - Navigate to the `my-skeleton-app` directory
 - Run `npm install` to install the required packages
@@ -11,5 +14,3 @@
 - Where possible try to use Skeleton's premade components as it saves time and looks pretty good.
 # Working on the website
 - Please create a new branch so we can work on different features simultaniously then merge with main when you have finished a feature.
-- The first major TODO is sorting out the website theme, currently its just the default.
-  - There is a theme generator on the Skeleton website which can be used to quickly make a nice colour/style theme
