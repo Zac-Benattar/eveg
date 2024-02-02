@@ -4,13 +4,29 @@
 	import type { Tab, TableSource } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 
-	let basket: BasketItem[] = [];
+	let basketTableData: BasketTableItem[] = [];
 	let basketPriceString: string = '£0.00';
 	let tableSource: TableSource;
 
+	type BasketTableItem = {
+		title: string;
+		pricePerUnit: string;
+		quantity: string;
+		totalPrice: string;
+	}
+
 	// Source Data
 	basketStore.subscribe((value) => {
-		basket = value;
+		for (let i = 0; i < value.length; i++) {
+			const item = value[i];
+			const basketItem = {
+				title: item.product.getProductTitle(),
+				pricePerUnit: item.product.getPriceString(),
+				quantity: item.quantity.toString(),
+				totalPrice: `£${(item.product.getPrice() * item.quantity / 100).toFixed(2)}`
+			}
+			basketTableData.push(basketItem);
+		}
 	});
 
 	basketPriceStringStore.subscribe((value) => {
@@ -19,24 +35,24 @@
 
 	function setTableSource(): TableSource {
 		return {
-			head: ['Name', 'Cost per unit', 'Quantity'],
-			body: tableMapperValues(basket, ['title', 'price', 'quantity']),
-			meta: tableMapperValues(basket, ['title']),
-			foot: ['Total Elements', '', `<span class="badge variant-soft-primary">${basketPriceString}</span>`]
+			head: ['Name', 'Cost per unit', 'Quantity', 'Total'],
+			body: tableMapperValues(basketTableData, ['title', 'pricePerUnit', 'quantity', 'totalPrice']),
+			meta: tableMapperValues(basketTableData, ['title']),
+			foot: ['Total', '', '', `<span class="badge variant-soft-primary">${basketPriceString}</span>`]
 		};
 	}
 
 	function removeItemFromBasket(e: CustomEvent<string[]>) {
 		console.log(e.detail);
 		basketStore.update((value) => {
-			const index = value.findIndex((basketItem) => basketItem.title === e.detail[0]);
+			const index = value.findIndex((basketItem) => basketItem.product.getProductTitle() === e.detail[0]);
 			value.splice(index, 1);
 			return value;
 		});
 	}
 
 	// If sourceData updates, set the new TableSource values
-	$: tableSource = basket ? setTableSource() : undefined;
+	$: tableSource = basketTableData ? setTableSource() : undefined;
 </script>
 
 <div>

@@ -6,7 +6,7 @@ export const basketStore = writable<BasketItem[]>([]);
 export const basketPriceStore = derived(basketStore, ($basket) => {
 	let cost: number = 0;
 	$basket.forEach((item) => {
-		cost += item.price * item.quantity;
+		cost += item.product.getPrice() * item.quantity;
 	});
 	return cost;
 });
@@ -17,19 +17,13 @@ export const basketPriceStringStore = derived(
 );
 
 export type BasketItem = {
-	title: string;
-	image: string;
-	price: number;
-	priceString: string;
-	packsize: number;
-	units: string;
-	productID: number;
+	product: Product;
 	quantity: number;
 };
 
-export function addToBasket(product: Product, quantity: number) {
+export function addToBasket(product: Product, quantity: number): void {
 	basketStore.update((items) => {
-		const existing = items.find((basketItem) => basketItem.title === product.getProductTitle());
+		const existing = items.find((basketItem) => basketItem.product.getProductTitle() === product.getProductTitle());
 		if (existing) {
 			existing.quantity += quantity;
 			return [...items];
@@ -37,13 +31,7 @@ export function addToBasket(product: Product, quantity: number) {
 			return [
 				...items,
 				{
-					title: product.getProductTitle(),
-					image: product.getImageSrc(),
-					price: product.getPrice(),
-					priceString: product.getPriceString(),
-					packsize: product.getPacksize(),
-					units: product.getUnits(),
-					productID: product.getProductID(),
+					product: product,
 					quantity: quantity
 				}
 			];
@@ -54,14 +42,14 @@ export function addToBasket(product: Product, quantity: number) {
 export function removeFromBasket(product: Product) {
 	basketStore.update((items) => {
 		const existing = items.find(
-			(basketItem) => basketItem.productID === product.getProductID()
+			(basketItem) => basketItem.product.getProductID() === product.getProductID()
 		);
 		if (existing && existing.quantity > 1) {
 			existing.quantity--;
 			return [...items];
 		} else {
 			return items.filter(
-				(basketItem) => basketItem.productID !== product.getProductID()
+				(basketItem) => basketItem.product.getProductID() !== product.getProductID()
 			);
 		}
 	});
