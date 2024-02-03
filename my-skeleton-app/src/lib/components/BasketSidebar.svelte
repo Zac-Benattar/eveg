@@ -13,7 +13,7 @@
 	});
 </script>
 
-<div class="flex flex-col">
+<div class="sidebar flex flex-col">
 	<div>
 		<div class="flex flex-col p-2 gap-3">
 			<h2>Basket</h2>
@@ -45,5 +45,9 @@
 		width: 50px;
 		height: 50px;
 		object-fit: cover;
+	}
+
+	.sidebar{
+		width: 300px;
 	}
 </style>
