@@ -38,6 +38,8 @@ export class Product {
 		let packSize: string;
 		if (this.units === 'unit') {
 			packSize = 'each';
+		} else if (this.units === 'pint') {
+			packSize = 'Pint';
 		} else {
 			packSize = `${this.packsize}${this.units}`;
 		}
@@ -106,7 +108,10 @@ export const filteredProductsStore = derived(
 		if (!$products) return [];
 
 		return $products.filter((product) => {
-			return product.getProductTitle().toLowerCase().includes($searchTerm.toLowerCase()) && $filters[product.getCategory()];
+			return (
+				product.getProductTitle().toLowerCase().includes($searchTerm.toLowerCase()) &&
+				$filters[product.getCategory()]
+			);
 		});
 	}
 );
