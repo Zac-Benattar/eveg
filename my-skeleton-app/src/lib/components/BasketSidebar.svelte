@@ -23,27 +23,34 @@
 
 <div class="sidebar flex flex-col">
 	<div>
-		<div class="flex flex-col p-2 gap-3">
-			<h2>Basket</h2>
-			<ul class="list">
-				{#each basket as item}
-					<li>
-						<div class="flex justify-center">
-							<img class="rounded-lg" src={item.product.getImageSrc()} alt="" />
-						</div>
-						<span>{item.product.getProductTitle()}</span>
-						<span>x{item.quantity}</span>
-					</li>
-				{/each}
-			</ul>
-			<div class="grow">
-				<h3>Total: {basketCost}</h3>
-			</div>
-			<div class="grow">
-				<a href="/checkout" class="btn variant-filled" data-sveltekit-preload-data="hover"
-					on:click={drawerClose}>Checkout</a
-				>
-			</div>
+		<div class="flex flex-col p-4">
+			<div class="h3 flex flex-row p-2">Basket</div>
+			{#if basket.length === 0}
+				<p class="p-2">Your basket is empty</p>
+			{:else}
+				<ul class="list p-2">
+					{#each basket as item}
+						<li class="p-1">
+							<div class="flex justify-center">
+								<img class="rounded-lg" src={item.product.getImageSrc()} alt="" />
+							</div>
+							<span>{item.product.getProductTitle()}</span>
+							<span>x{item.quantity}</span>
+						</li>
+					{/each}
+				</ul>
+				<div class="grow">
+					<div class="h4 p-2">Total: {basketCost}</div>
+				</div>
+				<div class="grow p-2">
+					<a
+						href="/checkout"
+						class="btn variant-filled"
+						data-sveltekit-preload-data="hover"
+						on:click={drawerClose}>Checkout</a
+					>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>

@@ -30,7 +30,7 @@
 	</div>
 	<div class="flex flex-row justify-center content-evenly gap-2">
 		<div class="h4">{product.getPriceString()}</div>
-		<div class="h4">{product.getPricePerUnitString()}</div>
+		<div class="h6 place-self-end">{product.getPricePerUnitString()}</div>
 	</div>
 	<div class="flex flex-row justify-center content-evenly gap-2">
 		<div class="grow">
