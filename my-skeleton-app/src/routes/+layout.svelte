@@ -21,7 +21,7 @@
 	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
 	import type { DrawerSettings, DrawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
-	import { CartOutline } from 'flowbite-svelte-icons';
+	import { CartOutline, ShoppingBagOutline } from 'flowbite-svelte-icons';
 
 	initializeStores();
 
@@ -63,21 +63,21 @@
 <AppShell slotSidebarRight="bg-surface-500/5 {classesBasketSidebar}">
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
-		<AppBar>
+		<AppBar padding="p-2 md:p-4">
 			<svelte:fragment slot="lead"
-				><a href="/" class="btn" data-sveltekit-preload-data="hover"><h1>E-Veg</h1></a
+				><a href="/" class="btn" data-sveltekit-preload-data="hover"
+					><div class="h2 md:h2">E-Veg</div></a
 				></svelte:fragment
 			>
 			<svelte:fragment slot="trail"
-				><div class="flex flex-row gap-x-3 place-items-center grow">
-					<div><LightSwitch /></div>
-					<div>
+				><div class="flex flex-row gap-x-2 place-items-center grow">
+					<div class="flex flex-row grow">
 						{#if showSearchBar}<SearchBar />{/if}
 					</div>
 					<div>
-						<button class="{classesBurgerButton} btn btn-sm mr-4" on:click={drawerOpen}>
+						<button class="{classesBurgerButton} btn btn-md" on:click={drawerOpen}>
 							<span>
-								<CartOutline />
+								<ShoppingBagOutline size="xl" />
 							</span>
 						</button>
 					</div>
@@ -89,10 +89,14 @@
 	<svelte:fragment slot="sidebarRight"><BasketSidebar /></svelte:fragment>
 
 	<svelte:fragment slot="pageFooter">
-		<div class="flex flex-col place-items-center grow-0 p-2">
-			<p>
-				&copy; 2021 InterVeg Coventry Ltd.<br />Fresh produce from the Midland's green countryside.
-			</p>
+		<div class="flex flex-row gap-2 place-content-center">
+			<div class="flex flex-col place-content-center grow-0 p-2"><LightSwitch /></div>
+			<div class="flex flex-col place-items-center grow-0 p-2">
+				<p>
+					&copy; 2021 InterVeg Coventry Ltd.<br />Fresh produce from the Midland's green
+					countryside.
+				</p>
+			</div>
 		</div>
 	</svelte:fragment>
 	<!-- Page Route Content -->

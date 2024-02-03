@@ -25,10 +25,10 @@
 
 <div class="flex flex-col p-2">
 	<div class="h2 flex flex-row place-content-center">Fresh Food</div>
-	<div class="flex flex-row place-content-center p-2 gap-x-5">
+	<div class="flex flex-col md:flex-row place-content-center p-2 gap-x-5 flex-wrap-reverse">
 		<label class="label">
 			<span>Filter by:</span>
-			<div class="flex flex-row gap-2">
+			<div class="flex flex-row flex-wrap gap-2">
 				{#each Object.keys(categories) as f}
 					<button
 						class="chip {categories[f] ? 'variant-filled' : 'variant-soft'}"
@@ -43,17 +43,15 @@
 				{/each}
 			</div>
 		</label>
-		<div>
-			<label class="label">
-				<span>Sort by:</span>
-				<select class="select" id="sort-by">
-					<option value="1">Alphabetical</option>
-					<option value="2">Category</option>
-					<option value="3">Price High to Low</option>
-					<option value="4">Price Low to High</option>
-				</select>
-			</label>
-		</div>
+		<label class="label">
+			<span>Sort by:</span>
+			<select class="select" id="sort-by">
+				<option value="1">Alphabetical</option>
+				<option value="2">Category</option>
+				<option value="3">Price High to Low</option>
+				<option value="4">Price Low to High</option>
+			</select>
+		</label>
 	</div>
 
 	<div class="container h-full mx-auto flex justify-center items-center">
