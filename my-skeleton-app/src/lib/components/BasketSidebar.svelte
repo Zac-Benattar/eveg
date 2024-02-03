@@ -1,8 +1,16 @@
 <script lang="ts">
 	import { type BasketItem, basketStore, basketPriceStringStore } from '$lib/basket';
 
+	import { getDrawerStore } from '@skeletonlabs/skeleton';
+
 	let basket: BasketItem[] = [];
 	let basketCost: string = '£0.00';
+
+	const drawerStore = getDrawerStore();
+
+	function drawerClose(): void {
+		drawerStore.close();
+	}
 
 	basketStore.subscribe((value) => {
 		basket = value;
@@ -33,7 +41,7 @@
 			</div>
 			<div class="grow">
 				<a href="/checkout" class="btn variant-filled" data-sveltekit-preload-data="hover"
-					>Checkout</a
+					on:click={drawerClose}>Checkout</a
 				>
 			</div>
 		</div>
@@ -47,7 +55,7 @@
 		object-fit: cover;
 	}
 
-	.sidebar{
+	.sidebar {
 		width: 300px;
 	}
 </style>

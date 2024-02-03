@@ -18,12 +18,31 @@
 	import { initializeStores } from '@skeletonlabs/skeleton';
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
+	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings, DrawerStore } from '@skeletonlabs/skeleton';
+	import { page } from '$app/stores';
+	import { CartOutline } from 'flowbite-svelte-icons';
 
 	initializeStores();
 
+	const drawerStore = getDrawerStore();
 	const modalStore = getModalStore();
 
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	$: classesBasketSidebar = $page.url.pathname === '/' ? 'w-0 lg:w-64' : 'w-0';
+	$: classesBurgerButton = $page.url.pathname === '/' ? 'lg:hidden' : 'hidden';
+	$: showSearchBar = $page.url.pathname === '/' ? true : false;
+
+	function drawerOpen(): void {
+		const drawerSettings: DrawerSettings = {
+			width: 'w-[256px] md:w-[316px]',
+			padding: 'p-4',
+			rounded: 'rounded-md',
+			position: 'right'
+		};
+		drawerStore.open(drawerSettings);
+	}
 
 	onMount(() => {
 		const modal: ModalSettings = {
@@ -38,9 +57,10 @@
 	});
 </script>
 
+<Drawer><BasketSidebar /></Drawer>
 <Modal />
 <!-- App Shell -->
-<AppShell>
+<AppShell slotSidebarRight="bg-surface-500/5 {classesBasketSidebar}">
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
 		<AppBar>
@@ -51,12 +71,23 @@
 			<svelte:fragment slot="trail"
 				><div class="flex flex-row gap-x-3 place-items-center grow">
 					<div><LightSwitch /></div>
-					<div><SearchBar /></div>
+					<div>
+						{#if showSearchBar}<SearchBar />{/if}
+					</div>
+					<div>
+						<button class="{classesBurgerButton} btn btn-sm mr-4" on:click={drawerOpen}>
+							<span>
+								<CartOutline />
+							</span>
+						</button>
+					</div>
 				</div></svelte:fragment
 			>
 		</AppBar>
 	</svelte:fragment>
+
 	<svelte:fragment slot="sidebarRight"><BasketSidebar /></svelte:fragment>
+
 	<svelte:fragment slot="pageFooter">
 		<div class="flex flex-col place-items-center grow-0 p-2">
 			<p>
