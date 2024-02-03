@@ -23,10 +23,10 @@
 	}
 </script>
 
-<div class="flex flex-col p-2">
+<div class="flex flex-col p-3">
 	<div class="h2 flex flex-row place-content-center">Fresh Food</div>
-	<div class="flex flex-col md:flex-row place-content-center p-2 gap-x-5 flex-wrap-reverse">
-		<label class="label">
+	<div class="flex flex-row p-2 gap-x-5 flex-wrap-reverse">
+		<label class="label p-2">
 			<span>Filter by:</span>
 			<div class="flex flex-row flex-wrap gap-2">
 				{#each Object.keys(categories) as f}
@@ -43,7 +43,7 @@
 				{/each}
 			</div>
 		</label>
-		<label class="label">
+		<label class="label p-2">
 			<span>Sort by:</span>
 			<select class="select" id="sort-by">
 				<option value="1">Alphabetical</option>
@@ -54,7 +54,7 @@
 		</label>
 	</div>
 
-	<div class="container h-full mx-auto flex justify-center items-center">
+	<div class="container h-full mx-auto flex justify-center items-center p-2">
 		<div class="space-y-10 text-center flex flex-col items-center">
 			<ProductsGrid products={productList} />
 		</div>
