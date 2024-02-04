@@ -1,10 +1,13 @@
 <script lang="ts">
 	import ProductsGrid from '$lib/components/ProductsGrid.svelte';
-	import { initProducts, filteredProductsStore, Product, filterStore } from '$lib/products';
+	import { initProducts, filteredProductsStore, Product, filterStore, sortMethodStore } from '$lib/products';
 
 	initProducts();
 
 	let productList: Product[] = [];
+	let sortMethod: string = 'Alphabetical';
+
+	$: sortMethodStore.set(sortMethod);
 
 	filteredProductsStore.subscribe((value) => {
 		productList = value;
@@ -45,11 +48,11 @@
 		</label>
 		<label class="label p-2">
 			<span>Sort by:</span>
-			<select class="select" id="sort-by">
-				<option value="1">Alphabetical</option>
-				<option value="2">Category</option>
-				<option value="3">Price High to Low</option>
-				<option value="4">Price Low to High</option>
+			<select class="select" id="sort-by" bind:value={sortMethod}>
+				<option value="Alphabetical">Alphabetical</option>
+				<option value="Category">Category</option>
+				<option value="Price High to Low">Price High to Low</option>
+				<option value="Price Low to High">Price Low to High</option>
 			</select>
 		</label>
 	</div>

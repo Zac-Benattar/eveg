@@ -115,17 +115,30 @@ const categories: Record<string, boolean> = {
 export const productsStore = writable<Product[]>();
 export const searchTermStore = writable<string>('');
 export const filterStore = writable<Record<string, boolean>>(categories);
+export const sortMethodStore = writable<string>('Alphabetical');
 export const filteredProductsStore = derived(
-	[productsStore, searchTermStore, filterStore],
-	([$products, $searchTerm, $filters]) => {
+	[productsStore, searchTermStore, filterStore, sortMethodStore],
+	([$products, $searchTerm, $filters, $sortMethod]) => {
 		if (!$products) return [];
 
-		return $products.filter((product) => {
+		const filteredProducts = $products.filter((product) => {
 			return (
 				product.getProductTitle().toLowerCase().includes($searchTerm.toLowerCase()) &&
 				$filters[product.getCategory()]
 			);
 		});
+
+		if ($sortMethod == 'Alphabetical') {
+			return filteredProducts.sort();
+		} else if ($sortMethod == 'Price Low to High') {
+			return filteredProducts.sort((a, b) => a.getPrice() - b.getPrice());
+		} else if ($sortMethod == 'Price High to Low') {
+			return filteredProducts.sort((a, b) => b.getPrice() - a.getPrice());
+		} else if ($sortMethod == 'Category') {
+			return filteredProducts.sort(
+				(a, b) => a.getCategory().charCodeAt(0) - b.getCategory().charCodeAt(0)
+			);
+		}
 	}
 );
 

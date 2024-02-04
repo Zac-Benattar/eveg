@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { addToBasket, removeOneFromBasket, type BasketItem, functionRemoveAllOfProductFromBasket } from '$lib/basket';
+	import {
+		addToBasket,
+		removeOneFromBasket,
+		type BasketItem,
+		functionRemoveAllOfProductFromBasket
+	} from '$lib/basket';
 
 	export let basketItem: BasketItem;
 
@@ -11,17 +16,21 @@
 		addToBasket(basketItem.product, -1);
 	}
 
-    function onRemove() {
-        functionRemoveAllOfProductFromBasket(basketItem.product);
-    }
+	function onRemove() {
+		functionRemoveAllOfProductFromBasket(basketItem.product);
+	}
 
 	$: basketItem.quantity = Math.min(Math.max(1, basketItem.quantity), 20);
 </script>
 
 <div class="card w-full md:w-60 flex flex-col p-2 gap-2">
-	<div class="flex flex-row flex-nowrap">
+	<div class="flex flex-row flex-nowrap place-content-evenly">
 		<div class="h4 grow-0">{basketItem.product.getProductTitle()}</div>
-		<button type="button" class="btn-icon variant-filled shrink-0 place-self-end" on:click={onRemove}>x</button>
+		<button
+			type="button"
+			class="btn-icon variant-filled shrink-0 place-self-end"
+			on:click={onRemove}>x</button
+		>
 	</div>
 
 	<div class="image-container">
