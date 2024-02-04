@@ -23,7 +23,9 @@ export type BasketItem = {
 
 export function addToBasket(product: Product, quantity: number): void {
 	basketStore.update((items) => {
-		const existing = items.find((basketItem) => basketItem.product.getProductTitle() === product.getProductTitle());
+		const existing = items.find(
+			(basketItem) => basketItem.product.getProductTitle() === product.getProductTitle()
+		);
 		if (existing) {
 			existing.quantity += quantity;
 			return [...items];

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import ProductsGrid from '$lib/components/ProductsGrid.svelte';
-	import { initProducts, filteredProductsStore, Product, filterStore, sortMethodStore } from '$lib/products';
+	import {
+		initProducts,
+		filteredProductsStore,
+		Product,
+		filterStore,
+		sortMethodStore
+	} from '$lib/products';
 
 	initProducts();
 
@@ -10,7 +16,7 @@
 	$: sortMethodStore.set(sortMethod);
 
 	filteredProductsStore.subscribe((value) => {
-		productList = value;
+		if (value != undefined) productList = value;
 	});
 
 	let categories: Record<string, boolean> = {
@@ -63,6 +69,3 @@
 		</div>
 	</div>
 </div>
-
-<style lang="postcss">
-</style>
