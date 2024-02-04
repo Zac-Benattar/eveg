@@ -4,18 +4,10 @@
 
 	export let product: Product;
 
-	const componentId: string = product.getProductID().toString();
-	const quantitySelectId: string = `quantity-select-${componentId}`;
+	let quantity: string = '1';
 
 	function onAddToBasket() {
-		// Find the quantity select element
-		const quantitySelect = document.getElementById(quantitySelectId) as HTMLSelectElement;
-
-		// Get the quantity value
-		const quantity = parseInt(quantitySelect.value);
-
-		// Add the product to the basket store
-		addToBasket(product, quantity);
+		addToBasket(product, parseInt(quantity));
 	}
 </script>
 
@@ -32,15 +24,15 @@
 	</div>
 	<div class="flex flex-row justify-center">
 		<div class="w-6/12 md:w-9/12 flex flex-row gap-2 place-content-evenly">
-				<select class="select" id={quantitySelectId}>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
+			<select class="select" bind:value={quantity}>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
 
-				<button type="button" class="btn variant-filled" on:click={onAddToBasket}>Add</button>
+			<button type="button" class="btn variant-filled" on:click={onAddToBasket}>Add</button>
 		</div>
 	</div>
 </div>

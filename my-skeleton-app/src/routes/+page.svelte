@@ -25,7 +25,7 @@
 
 <div class="flex flex-col p-3">
 	<div class="h2 flex flex-row place-content-center">Fresh Food</div>
-	<div class="flex flex-row p-2 gap-x-5 flex-wrap-reverse">
+	<div class="flex flex-row p-2 gap-x-5 md:place-content-center flex-wrap-reverse">
 		<label class="label p-2">
 			<span>Filter by:</span>
 			<div class="flex flex-row flex-wrap gap-2">
