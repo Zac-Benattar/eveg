@@ -2,6 +2,7 @@
 	import { type BasketItem, basketStore, basketPriceStringStore } from '$lib/basket';
 
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import BasketSidebarCard from './BasketSidebarCard.svelte';
 
 	let basket: BasketItem[] = [];
 	let basketCost: string = '£0.00';
@@ -30,13 +31,7 @@
 			{:else}
 				<ul class="list p-2">
 					{#each basket as item}
-						<li class="p-1">
-							<div class="flex justify-center">
-								<img class="rounded-lg" src={item.product.getImageSrc()} alt="" />
-							</div>
-							<span>{item.product.getProductTitle()}</span>
-							<span>x{item.quantity}</span>
-						</li>
+						<BasketSidebarCard basketItem={item}/>
 					{/each}
 				</ul>
 				<div class="grow">
@@ -56,12 +51,6 @@
 </div>
 
 <style lang="postcss">
-	img {
-		width: 50px;
-		height: 50px;
-		object-fit: cover;
-	}
-
 	.sidebar {
 		width: 300px;
 	}

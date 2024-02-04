@@ -39,7 +39,7 @@ export function addToBasket(product: Product, quantity: number): void {
 	});
 }
 
-export function removeOneFromBasket(product: Product) {
+export function decrementBasketItemQuantity(product: Product) {
 	basketStore.update((items) => {
 		const existing = items.find(
 			(basketItem) => basketItem.product.getProductID() === product.getProductID()
@@ -55,7 +55,7 @@ export function removeOneFromBasket(product: Product) {
 	});
 }
 
-export function functionRemoveAllOfProductFromBasket(product: Product) {
+export function removeAllOfProductFromBasket(product: Product) {
 	basketStore.update((items) => {
 		return items.filter(
 			(basketItem) => basketItem.product.getProductID() !== product.getProductID()

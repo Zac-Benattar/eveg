@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addToBasket, type BasketItem, removeAllOfProductFromBasket } from '$lib/basket';
+	import { addToBasket, removeAllOfProductFromBasket, type BasketItem } from '$lib/basket';
 
 	export let basketItem: BasketItem;
 
@@ -11,10 +11,6 @@
 		addToBasket(basketItem.product, -1);
 	}
 
-	function onRemove() {
-		removeAllOfProductFromBasket(basketItem.product);
-	}
-
 	$: {
 		if (basketItem.quantity > 0) {
 			basketItem.quantity = Math.min(basketItem.quantity, 20);
@@ -24,26 +20,18 @@
 	}
 </script>
 
-<div class="card w-full md:w-60 flex flex-col p-2 gap-2">
-	<div class="flex flex-row flex-nowrap">
-		<div class="h4 grow-0">{basketItem.product.getProductTitle()}</div>
-		<button
-			type="button"
-			class="btn-icon variant-filled shrink-0 place-self-end"
-			on:click={onRemove}>x</button
-		>
-	</div>
-
-	<div class="image-container">
+<li class="p-1 flex flex-col w-full">
+	<div class="p-1 flex flex-row w-full gap-2">
 		<div class="flex justify-center">
-			<img class="rounded-lg" src={basketItem.product.getImageSrc()} alt="" />
+			<img
+				class="rounded-lg"
+				src={basketItem.product.getImageSrc()}
+				alt="{basketItem}.product.getProductName()}"
+			/>
 		</div>
+		<span class="w-9/12">{basketItem.product.getProductTitle()}</span>
 	</div>
-	<div class="flex flex-row justify-center content-evenly gap-2">
-		<div class="h4">{basketItem.product.getPriceString()}</div>
-		<div class="h6 place-self-end">{basketItem.product.getPricePerUnitString()}</div>
-	</div>
-	<div class="flex flex-row justify-center">
+	<div class="p-1 flex flex-row w-full">
 		<div class="w-9/12 md:w-9/12 flex flex-row gap-2 place-content-evenly">
 			<input
 				class="input"
@@ -61,12 +49,12 @@
 			>
 		</div>
 	</div>
-</div>
+</li>
 
 <style lang="postcss">
 	img {
-		width: 150px;
-		height: 150px;
+		width: 50px;
+		height: 50px;
 		object-fit: cover;
 	}
 
