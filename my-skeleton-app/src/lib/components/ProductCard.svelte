@@ -31,8 +31,7 @@
 		<div class="h6 place-self-end">{product.getPricePerUnitString()}</div>
 	</div>
 	<div class="flex flex-row justify-center">
-		<div class="w-6/12 md:w-9/12 flex flex-row">
-			<div class="grow">
+		<div class="w-6/12 md:w-9/12 flex flex-row gap-2 place-content-evenly">
 				<select class="select" id={quantitySelectId}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -40,11 +39,8 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>
-			</div>
 
-			<div class="grow flex flex-row place-content-end">
 				<button type="button" class="btn variant-filled" on:click={onAddToBasket}>Add</button>
-			</div>
 		</div>
 	</div>
 </div>

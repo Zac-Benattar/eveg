@@ -1,17 +1,12 @@
 <script lang="ts">
 	import { searchTermStore } from '.././products';
-	function search() {
-		// Find the search input element
-		const searchInput = document.getElementById('search-input') as HTMLInputElement;
 
-		// Get the search term value
-		searchTermStore.set(searchInput.value);
-	}
+	let searchTerm = '';
 
-	function handleKeypress(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			search();
-		}
+	// Whenever searchTerm changes, call search()
+	$: {
+		searchTerm;
+		searchTermStore.set(searchTerm);
 	}
 </script>
 
@@ -22,10 +17,6 @@
 		title="Input (text)"
 		type="text"
 		placeholder="Search"
-		on:keypress={handleKeypress}
+		bind:value={searchTerm}
 	/>
-
-	<button type="button" class="btn-icon variant-filled invisible md:visible" on:click={search}
-		>🔍</button
-	>
 </div>

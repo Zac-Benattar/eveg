@@ -35,13 +35,23 @@ export class Product {
 	}
 
 	public getProductTitle(): string {
-		let packSize: string;
-		if (this.units === 'unit') {
-			packSize = 'each';
+		let packSize: string = '';
+		// Deal with outliers first
+		if (this.name === 'Eggs') {
+			packSize = this.packsize.toString() + ' Pack';
+		} else if (this.units === 'unit') {
+			packSize = 'Each';
 		} else if (this.units === 'pint') {
-			packSize = 'Pint';
+			packSize = ' Pint';
+		} else if (this.units === 'bag') {
+			packSize = this.packsize.toString() + ' Bags';
 		} else {
-			packSize = `${this.packsize}${this.units}`;
+			if (this.packsize > 1000) {
+				if (this.units === 'g') packSize = `${this.packsize / 1000}kg`;
+				else if (this.units === 'ml') packSize = `${this.packsize / 1000}L`;
+			} else {
+				packSize = `${this.packsize}${this.units}`;
+			}
 		}
 		return `${this.name} ${packSize}`;
 	}
@@ -84,6 +94,9 @@ export class Product {
 		} else if (this.units === 'g') {
 			unit = '/kg';
 			multiplier = 1000;
+		} else if (this.units === 'pint') {
+			unit = '/litre';
+			multiplier = 2.27305;
 		} else {
 			unit = `/${this.units}`;
 		}
