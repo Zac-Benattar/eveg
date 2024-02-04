@@ -39,7 +39,7 @@ export function addToBasket(product: Product, quantity: number): void {
 	});
 }
 
-export function removeFromBasket(product: Product) {
+export function removeOneFromBasket(product: Product) {
 	basketStore.update((items) => {
 		const existing = items.find(
 			(basketItem) => basketItem.product.getProductID() === product.getProductID()
@@ -52,6 +52,14 @@ export function removeFromBasket(product: Product) {
 				(basketItem) => basketItem.product.getProductID() !== product.getProductID()
 			);
 		}
+	});
+}
+
+export function functionRemoveAllOfProductFromBasket(product: Product) {
+	basketStore.update((items) => {
+		return items.filter(
+			(basketItem) => basketItem.product.getProductID() !== product.getProductID()
+		);
 	});
 }
 

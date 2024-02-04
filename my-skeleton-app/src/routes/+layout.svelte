@@ -89,8 +89,8 @@
 	<svelte:fragment slot="sidebarRight"><BasketSidebar /></svelte:fragment>
 
 	<svelte:fragment slot="pageFooter">
-		<div class="flex flex-row gap-2 place-content-center">
-			<div class="flex flex-col place-content-center grow-0 p-2"><LightSwitch /></div>
+		<div class="flex flex-row gap-2 place-content-center p-2">
+			<div class="flex flex-col place-content-center grow-0 ml-2 p-2"><LightSwitch /></div>
 			<div class="flex flex-col place-items-center grow-0 p-2">
 				<p>
 					&copy; 2021 InterVeg Coventry Ltd.<br />Fresh produce from the Midland's green
