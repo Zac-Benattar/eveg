@@ -1,9 +1,24 @@
 <script lang="ts">
-	import { Product } from '$lib/products';
+	import { Product, productsStore } from '$lib/products';
 	import { addToBasket } from '$lib/basket';
 	import NutritionInfoBox from '$lib/components/NutritionInfoBox.svelte';
+	import { page } from '$app/stores';
+
+	let id = $page.params.id;
 
 	export let product: Product;
+
+	let productList: Product[] = [];
+	productsStore.subscribe((value) => {
+		if (value != undefined) productList = value;
+	});
+
+	$: {
+		if (productList.length > 0) {
+			const tempProduct = productList.find((p) => p.getProductID() == parseInt(id));
+			if (tempProduct != undefined) product = tempProduct;
+		}
+	}
 
 	// For testing purposes, remove when connecting to url param
 	product = new Product({

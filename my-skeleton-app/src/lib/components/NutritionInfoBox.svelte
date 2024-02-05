@@ -70,7 +70,7 @@
 	<div class="flex flex-row place-content-center">
 		{#if units === 'g' || units === 'ml'}
 			<div>
-				Energy per 100{units}: {per100 * 4.19}kJ {per100}kcal
+				Energy per 100{units}: {Math.round(per100 * 4.19)}kJ {per100}kcal
 			</div>
 		{/if}
 	</div>

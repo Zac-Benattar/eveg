@@ -12,7 +12,12 @@
 </script>
 
 <div class="card w-full md:w-60 flex flex-col p-2 gap-2">
-	<div class="h4 grow-0">{product.getProductTitle()}</div>
+	<a
+		href="/product/{product.getProductID()}"
+		class="btn h4 grow-0 mt-2"
+		data-sveltekit-preload-data="hover">{product.getProductTitle()}</a
+	>
+
 	<div class="image-container">
 		<div class="flex justify-center">
 			<img class="rounded-lg" src={product.getImageSrc()} alt="" />

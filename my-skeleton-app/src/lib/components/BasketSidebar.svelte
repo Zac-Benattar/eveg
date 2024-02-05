@@ -29,7 +29,7 @@
 			{#if basket.length === 0}
 				<p class="p-2">Your basket is empty</p>
 			{:else}
-				<ul class="list p-2">
+				<ul class="list mr-7">
 					{#each basket as item}
 						<BasketSidebarCard basketItem={item}/>
 					{/each}
