@@ -25,12 +25,15 @@
 </script>
 
 <div class="card w-full md:w-60 flex flex-col p-2 gap-2">
-	<div class="flex flex-row flex-nowrap">
-		<div class="h4 grow-0">{basketItem.product.getProductTitle()}</div>
+	<div class="grid grid-cols-4">
+		<div></div>
+		<div class="h4 col-span-2 flex flex-row place-content-center">
+			{basketItem.product.getProductTitle()}
+		</div>
 		<button
 			type="button"
-			class="btn-icon variant-filled shrink-0 place-self-end"
-			on:click={onRemove}>x</button
+			class="btn-icon variant-filled shrink-0 justify-self-end"
+			on:click={onRemove}><span>x</span></button
 		>
 	</div>
 
@@ -54,10 +57,10 @@
 				bind:value={basketItem.quantity}
 			/>
 			<button type="button" class="btn-icon variant-filled shrink-0" on:click={onIncrement}
-				>+</button
+				><span class="text-3xl">+</span></button
 			>
 			<button type="button" class="btn-icon variant-filled shrink-0" on:click={onDecrement}
-				>-</button
+				><span class="text-5xl text-b mb-2">-</span></button
 			>
 		</div>
 	</div>
