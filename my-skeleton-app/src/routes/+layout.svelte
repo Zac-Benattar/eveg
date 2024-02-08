@@ -19,9 +19,10 @@
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
-	import type { DrawerSettings, DrawerStore } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
-	import { CartOutline, ShoppingBagOutline } from 'flowbite-svelte-icons';
+	import { ShoppingBagOutline, HomeOutline } from 'flowbite-svelte-icons';
+	import { goto } from '$app/navigation';
 
 	initializeStores();
 
@@ -32,6 +33,7 @@
 
 	$: classesBasketSidebar = $page.url.pathname === '/' ? 'w-0 lg:w-64' : 'w-0';
 	$: classesBurgerButton = $page.url.pathname === '/' ? 'lg:hidden' : 'hidden';
+	$: classesHomeButton = $page.url.pathname === '/' ? 'hidden' : 'lg:hidden';
 	$: showSearchBar = $page.url.pathname === '/' ? true : false;
 
 	function drawerOpen(): void {
@@ -44,12 +46,18 @@
 		drawerStore.open(drawerSettings);
 	}
 
+	function goHome(): void {
+		goto('/');
+	}
+
 	onMount(() => {
 		const modal: ModalSettings = {
 			type: 'confirm',
 			// Data
 			title: 'This site uses cookies',
 			body: 'By using this site, you are consenting to our use of cookies <br> We use cookies purely for the functionality of the website - to store the products that are in your basket. <br> For further details of how we use your data, please see our privacy policy.',
+			buttonTextConfirm: 'Accept',
+			buttonTextCancel: 'Reject',
 			// TRUE if confirm pressed, FALSE if cancel pressed
 			response: (r: boolean) => console.log('response:', r)
 		};
@@ -67,8 +75,8 @@
 			<svelte:fragment slot="lead"
 				><a href="/" class="btn" data-sveltekit-preload-data="hover"
 					><div class="h2 md:h2">E-Veg</div></a
-				></svelte:fragment
-			>
+				>
+			</svelte:fragment>
 			<svelte:fragment slot="trail"
 				><div class="flex flex-row gap-x-2 place-items-center grow">
 					<div class="flex flex-row grow">
@@ -81,6 +89,13 @@
 							</span>
 						</button>
 					</div>
+					<div class="flex">
+						<button class="{classesHomeButton} btn btn-md" on:click={goHome}>
+							<span>
+								<HomeOutline size="xl" />
+							</span>
+						</button>
+					</div>
 				</div></svelte:fragment
 			>
 		</AppBar>
@@ -90,11 +105,11 @@
 
 	<svelte:fragment slot="pageFooter">
 		<div class="flex flex-col flex-wrap">
-			<div class="flex flex-row place-content-center p-2">
+			<div class="flex flex-row place-content-center">
 				<a href="/" class="btn btn-md text-xl">About</a>
 				<a href="/" class="btn btn-md text-xl">Contact</a>
 			</div>
-			<div class="flex flex-row gap-2 place-content-center p-2">
+			<div class="flex flex-row gap-2 place-content-center pb-2 pr-2 pl-2">
 				<div class="flex flex-col place-content-center grow-0 ml-2 p-2"><LightSwitch /></div>
 				<div class="flex flex-col place-items-center grow-0 p-2">
 					<p>

@@ -11,22 +11,24 @@
 	}
 </script>
 
-<div class="card w-full md:w-60 flex flex-col p-2 gap-2">
-	<a
-		href="/product/{product.getProductID()}"
-		class="btn h4 grow-0 mt-2"
-		data-sveltekit-preload-data="hover">{product.getProductTitle()}</a
-	>
-
+<div class="card w-full sm:w-60 flex flex-col p-5 gap-2">
 	<div class="image-container">
 		<div class="flex justify-center">
 			<img class="rounded-lg" src={product.getImageSrc()} alt="" />
 		</div>
 	</div>
+	
+	<a
+		href="/product/{product.getProductID()}"
+		class="btn grow-0 text-blue-700"
+		data-sveltekit-preload-data="hover"><div class="h2 sm:h4">{product.getProductTitle()}</div></a
+	>
+
 	<div class="flex flex-row justify-center content-evenly gap-2">
-		<div class="h4">{product.getPriceString()}</div>
-		<div class="h6 place-self-end">{product.getPricePerUnitString()}</div>
+		<div class="h3 sm:h4">{product.getPriceString()}</div>
+		<div class="h5 sm:h6 place-self-end">{product.getPricePerUnitString()}</div>
 	</div>
+
 	<div class="flex flex-row justify-center">
 		<div class="w-6/12 md:w-9/12 flex flex-row gap-2 place-content-evenly">
 			<select class="select" bind:value={quantity}>

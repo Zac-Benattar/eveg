@@ -1,15 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="card">
-	<h1>Credit Card Payment Processing...</h1>
-
-	<p>
-		At this point, the website would take credit card details - please <b>do not</b> implement this!
-	</p>
-	<p>
-		You can keep the contents of this page exactly as it is, but you might like to consider an
-		alternative way of getting to this page.
-	</p>
-	<p>A receipt has been emailed to testuser@example.org</p>
+<div class="card flex flex-row flex-wrap p-5 gap-2 max-w-lg">
+	<div class="h2 sm:h3">Credit Card Payment Processing...</div>
+	<div class="h5">A receipt has been emailed to testuser@example.org</div>
 </div>

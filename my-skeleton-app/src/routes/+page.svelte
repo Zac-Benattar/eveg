@@ -33,7 +33,7 @@
 </script>
 
 <div class="flex flex-col p-3">
-	<div class="h2 flex flex-row place-content-center">Fresh Food</div>
+	<div class="h1 sm:h2 flex flex-row place-content-center">Fresh Food</div>
 	<div class="flex flex-row p-2 gap-x-5 md:place-content-center flex-wrap-reverse">
 		<label class="label p-2">
 			<span>Filter by:</span>

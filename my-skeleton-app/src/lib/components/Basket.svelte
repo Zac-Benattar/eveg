@@ -11,7 +11,7 @@
 	}
 </script>
 
-<div class="card flex flex-col p-2">
+<div class="card flex flex-col p-3">
 	<div class="h3 p-2">Basket Summary</div>
 	<div class="flex flex-row place-content-center"><hr class="w-11/12" /></div>
 	<div class="h4 p-2">Total: {basketPriceString}</div>
