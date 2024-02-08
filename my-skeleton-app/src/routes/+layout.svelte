@@ -106,12 +106,12 @@
 	<svelte:fragment slot="pageFooter">
 		<div class="flex flex-col flex-wrap">
 			<div class="flex flex-row place-content-center">
-				<a href="/" class="btn btn-md text-xl">About</a>
-				<a href="/" class="btn btn-md text-xl">Contact</a>
+				<a href="/" class="btn btn-md sm:text-xl">About</a>
+				<a href="/" class="btn btn-md sm:text-xl">Contact</a>
 			</div>
 			<div class="flex flex-row gap-2 place-content-center pb-2 pr-2 pl-2">
 				<div class="flex flex-col place-content-center grow-0 ml-2 p-2"><LightSwitch /></div>
-				<div class="flex flex-col place-items-center grow-0 p-2">
+				<div class="flex flex-col place-items-center grow-0 p-2 text-xs sm:text-sm">
 					<p>
 						&copy; 2021 InterVeg Coventry Ltd.<br />Fresh produce from the Midland's green
 						countryside.

@@ -31,7 +31,7 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="flex flex-row place-content-center">
+	<div class="flex flex-row p-2">
 		<div>This pack contains:</div>
 	</div>
 

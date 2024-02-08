@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
+	import AllergenInfoBox from '$lib/components/AllergenInfoBox.svelte';
 
 	function goHome(): void {
 		goto('/');
@@ -49,6 +50,12 @@
 	nutritionInfoNums[2] = Math.round(Math.random() * 50) / 10;
 	nutritionInfoNums[3] = Math.round(Math.random() * 40) / 10;
 	nutritionInfoNums[4] = Math.round(Math.random() * 30) / 10;
+
+	const allergenNums: number[] = [];
+	for (let i = 0; i < 5; i++) {
+		if (Math.random() > 0.3) allergenNums[i] = 1;
+		else allergenNums[i] = 0;
+	}
 </script>
 
 <div class="flex flex-row place-content-center">
@@ -80,6 +87,9 @@
 						packsize={product.getPacksize()}
 						units={product.getUnits()}
 					/>
+				</div>
+				<div>
+					<AllergenInfoBox {allergenNums} />
 				</div>
 				<div class="flex flex-row place-content-center">
 					<div class="w-8/12 flex flex-row gap-2 place-content-evenly">
