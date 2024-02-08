@@ -7,6 +7,9 @@
 		filterStore,
 		sortMethodStore
 	} from '$lib/products';
+	import { getToastStore } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	initProducts();
 

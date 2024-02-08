@@ -2,12 +2,23 @@
 	import type { Product } from '$lib/products';
 	import { addToBasket } from '$lib/basket';
 
+	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
+
 	export let product: Product;
 
 	let quantity: string = '1';
 
 	function onAddToBasket() {
 		addToBasket(product, parseInt(quantity));
+		const message = `${quantity} ${product.getProductTitle()} added to basket.`;
+		const t: ToastSettings = {
+			message: message,
+			hideDismiss: true,
+			timeout: 1800
+		};
+		toastStore.trigger(t);
 	}
 </script>
 
@@ -17,7 +28,7 @@
 			<img class="rounded-lg" src={product.getImageSrc()} alt="" />
 		</div>
 	</div>
-	
+
 	<a
 		href="/product/{product.getProductID()}"
 		class="btn grow-0 text-blue-700"

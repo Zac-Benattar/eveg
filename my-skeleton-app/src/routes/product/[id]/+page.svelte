@@ -6,6 +6,9 @@
 	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
 	import AllergenInfoBox from '$lib/components/AllergenInfoBox.svelte';
+	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	function goHome(): void {
 		goto('/');
@@ -42,6 +45,13 @@
 
 	function onAddToBasket() {
 		addToBasket(product, parseInt(quantity));
+		const message = `${quantity} ${product.getProductTitle()} added to basket.`;
+		const t: ToastSettings = {
+			message: message,
+			hideDismiss: true,
+			timeout: 1800
+		};
+		toastStore.trigger(t);
 	}
 
 	const nutritionInfoNums: number[] = [];

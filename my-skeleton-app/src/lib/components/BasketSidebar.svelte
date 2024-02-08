@@ -3,6 +3,9 @@
 
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import BasketSidebarCard from './BasketSidebarCard.svelte';
+	import { getToastStore } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	let basket: BasketItem[] = [];
 	let basketCost: string = '£0.00';
@@ -10,6 +13,7 @@
 	const drawerStore = getDrawerStore();
 
 	function drawerClose(): void {
+		toastStore.clear();
 		drawerStore.close();
 	}
 
@@ -31,7 +35,7 @@
 			{:else}
 				<ul class="list mr-7">
 					{#each basket as item}
-						<BasketSidebarCard basketItem={item}/>
+						<BasketSidebarCard basketItem={item} />
 					{/each}
 				</ul>
 				<div class="grow">

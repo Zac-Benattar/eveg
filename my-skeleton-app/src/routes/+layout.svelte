@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, Toast } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 
 	import { dev } from '$app/environment';
@@ -65,6 +65,7 @@
 	});
 </script>
 
+<Toast />
 <Drawer><BasketSidebar /></Drawer>
 <Modal />
 <!-- App Shell -->
