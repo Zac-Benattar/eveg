@@ -40,7 +40,8 @@ export class Product {
 		if (this.name === 'Eggs') {
 			packSize = this.packsize.toString() + ' Pack';
 		} else if (this.units === 'unit') {
-			packSize = 'Each';
+			if (this.packsize === 1) packSize = 'Each';
+			else packSize = this.packsize.toString() + ' Pack';
 		} else if (this.units === 'pint') {
 			packSize = ' Pint';
 		} else if (this.units === 'bag') {
