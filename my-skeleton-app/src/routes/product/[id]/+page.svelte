@@ -44,7 +44,7 @@
 	}
 
 	const nutritionInfoNums: number[] = [];
-	nutritionInfoNums[0] = Math.round(Math.random() * 500);
+	nutritionInfoNums[0] = Math.round(Math.random() * 500) + 100;
 	nutritionInfoNums[1] = Math.round(Math.random() * 150) / 10;
 	nutritionInfoNums[2] = Math.round(Math.random() * 50) / 10;
 	nutritionInfoNums[3] = Math.round(Math.random() * 40) / 10;
