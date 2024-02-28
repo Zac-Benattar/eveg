@@ -23,7 +23,7 @@ export class Product {
 	constructor(productData: ProductData) {
 		this.name = productData.name;
 		this.category = productData.category;
-		this.image = new URL('assets/images/' + productData.image, import.meta.url).href;
+		this.image = new URL(productData.image, import.meta.url).href;
 		this.packsize = productData.packsize;
 		this.units = productData.units;
 		this.price = productData.price;
