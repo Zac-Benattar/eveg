@@ -454,5 +454,13 @@
 		"packsize": 500,
 		"units": "unit",
 		"price": 5699
+	},
+	{
+		"name": "Stuart Croft Kisses",
+		"category": "other",
+		"image": "https://warwickboar.shorthandstories.com/the-boar-stuart-croft-interview-2020/assets/827vOR4yld/stuart_croft-2560x2782.jpeg",
+		"packsize": 1,
+		"units": "unit",
+		"price": 1000000
 	}
 ]
